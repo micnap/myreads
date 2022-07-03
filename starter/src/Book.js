@@ -22,7 +22,7 @@ const Book = ({ book, onShelfChange }) => {
                     <Shelfchanger onShelfChange={onShelfChangeChild} selected={book.shelf} />
                 </div>
                 <div className="book-title">{book.title}</div>
-                {book.authors.map((author, index) => <Author key={index} author={author} />)}
+                {book.authors && book.authors.map((author, index) => <Author key={index} author={author} />)}
             </div>
         </li>
 
