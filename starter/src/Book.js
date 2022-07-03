@@ -9,6 +9,8 @@ const Book = ({ book, onShelfChange }) => {
         onShelfChange(book, shelf);
     }
 
+    let imgUrl = book.imageLinks ? book.imageLinks.thumbnail : '';
+
     return (
         <li key={book.id}>
             <div className="book">
@@ -18,7 +20,7 @@ const Book = ({ book, onShelfChange }) => {
                         style={{
                             width: 128,
                             height: 193,
-                            backgroundImage: `url(${book.imageLinks.thumbnail})`,
+                            backgroundImage: `url(${imgUrl})`,
                         }}
                     ></div>
                     <Shelfchanger onShelfChange={onShelfChangeChild} selected={book.shelf ? book.shelf : 'none'} />
@@ -27,8 +29,6 @@ const Book = ({ book, onShelfChange }) => {
                 {book.authors && book.authors.map((author, index) => <Author key={index} author={author} />)}
             </div>
         </li>
-
-
     );
 }
 

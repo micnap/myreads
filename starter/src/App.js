@@ -13,7 +13,6 @@ function App() {
   const handleShelfChange = (book, shelf) => {
     const newState = books.map(obj => {
       if (obj.id === book.id) {
-        console.log('bla', 'bla');
         updateBooks(book, shelf);
         return {...obj, shelf: shelf};
       }
@@ -29,12 +28,17 @@ function App() {
   }, []);
 
   const getBooks = async (clear) => {
+    if (clear) {
+      setBooks([])
+      return;
+    }
     const books = await BooksAPI.getAll();
-    clear ? setBooks([]) : setBooks(books);
+    setBooks(books);
   }
 
   const searchBooks = async (e) => {
     if (!e) {
+      setBooks([]);
       return;
     }
     const books = await BooksAPI.search(e.target.value);
@@ -42,7 +46,7 @@ function App() {
   }
 
   const updateBooks = async (book, shelf) => {
-    const grr = await BooksAPI.update(book, shelf);
+    await BooksAPI.update(book, shelf);
   }
 
   return (
@@ -53,7 +57,7 @@ function App() {
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
-            {books && <Shelves books={books} onShelfChange={handleShelfChange}/>}
+            {<Shelves books={books} onShelfChange={handleShelfChange}/>}
             <div className="open-search">
               <Link to="/search">Add a book</Link>
             </div>
@@ -63,7 +67,7 @@ function App() {
         <Route path="/search" element={
           <div className="search-books">
             <div className="search-books-bar">
-              <Link to="/" className="close-search" onClick={getBooks}>Close</Link>
+              <Link to="/" className="close-search">Close</Link>
               <div className="search-books-input-wrapper">
                 <input
                     type="text"
