@@ -4,6 +4,8 @@ import Shelfchanger from './Shelfchanger';
 const Book = ({ book, onShelfChange }) => {
 
     const onShelfChangeChild = (shelf) => {
+        console.log(shelf, 'shelf');
+        console.log(book, 'book');
         onShelfChange(book, shelf);
     }
 
@@ -19,7 +21,7 @@ const Book = ({ book, onShelfChange }) => {
                             backgroundImage: `url(${book.imageLinks.thumbnail})`,
                         }}
                     ></div>
-                    <Shelfchanger onShelfChange={onShelfChangeChild} selected={book.shelf} />
+                    <Shelfchanger onShelfChange={onShelfChangeChild} selected={book.shelf ? book.shelf : 'none'} />
                 </div>
                 <div className="book-title">{book.title}</div>
                 {book.authors && book.authors.map((author, index) => <Author key={index} author={author} />)}

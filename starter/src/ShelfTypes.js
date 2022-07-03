@@ -1,8 +1,7 @@
 const ShelfTypes = [
     ["wantToRead", "Want to Read"],
     ["currentlyReading", "Currently Reading"],
-    ["read", "Read"],
-    ["none", "None"]
+    ["read", "Read"]
 ];
 
 export default ShelfTypes;
